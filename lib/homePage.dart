@@ -43,12 +43,14 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
           backgroundColor: Colors.grey[300],
           appBar: AppBar(
+            backgroundColor: Colors.transparent,
             titleSpacing: 0.0,
             automaticallyImplyLeading: false,
             elevation: 0,
             title: Padding(
               padding: const EdgeInsets.symmetric(horizontal:20.0),
-              child: Text("Flutter Reddit Posts"),
+              child: Text("Flutter Reddit Posts",
+              style: TextStyle(color: Theme.of(context).primaryColor),),
             ),
           ),
           body: _stage == PostLoadingStage.LOADING ?
@@ -77,8 +79,8 @@ class _HomePageState extends State<HomePage> {
                 physics: AlwaysScrollableScrollPhysics(),
                   itemCount:  _postsList.isEmpty ? 1 :_postsList.length,
                   itemBuilder: (context, index){
-                  if(_postsList[index].scureMedia.isNotEmpty)
-                   print("here is video link ${_postsList[index].scureMedia['media_domain_url']}");
+                  // if(_postsList[index].scureMedia.isNotEmpty)
+                  //  print("here is video link ${_postsList[index].scureMedia['media_domain_url']}");
                     return   _postsList.isEmpty ?
                     Center(child: Padding(
                       padding: EdgeInsets.only(top: media.height * 0.4),
@@ -204,7 +206,7 @@ showAlertDialog(BuildContext context, {Widget alertTitle, String content}) {
   Widget okButton = FlatButton(
     child: Text(
       "OK",
-      style: TextStyle(color: Color(0xff2A4972),fontFamily: "DIN",
+      style: TextStyle(color: Color(0xff2A4972),
           fontWeight: FontWeight.bold),
     ),
     onPressed: () {
@@ -215,7 +217,7 @@ showAlertDialog(BuildContext context, {Widget alertTitle, String content}) {
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: alertTitle ?? SizedBox(),
-    content: Text(content,style: TextStyle(fontFamily: "DIN"),),
+    content: Text(content),
     actions: [
       okButton,
     ],
@@ -223,7 +225,6 @@ showAlertDialog(BuildContext context, {Widget alertTitle, String content}) {
 
   // show the dialog
   showDialog(
-
     context: context,
     builder: (BuildContext context) {
       return alert;
